@@ -14,7 +14,7 @@ const count = ref(1);
     </main>
 </template>
 
-<style scoped>
+<style scoped> 
 main {
     text-align: center;
     background-color: #622105;
