@@ -1,5 +1,11 @@
+<script setup>
+import { ref } from "vue";
+const showForm = ref(true)
+</script>
+
 <template>
   <main>
+    <!-- memo -->
     <div class="container">
       <header>
         <h1 class="header-title">Memo</h1>
@@ -23,6 +29,17 @@
       </div>
       <!--end card memo -->
     </div>
+    <!-- end memo -->
+
+    <!-- form input memo -->
+    <div v-if="showForm" class="overlay">
+      <div class="form-modal">
+        <button class="form-close-btn">&times;</button>
+        <textarea name="memo" id="memo" cols="30" rows="10"></textarea>
+        <button class="form-save-btn">Save</button>
+      </div>
+    </div>
+    <!-- end form input memo -->
   </main>
 </template>
 
@@ -80,4 +97,31 @@ header {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.overlay {
+  position : absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.77);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-save-btn {
+  padding: 10px 20px;
+  font-size : 20px;
+  width: 100%;
+  background-color: #495a7d;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 15px;
+  color: white;
+}
+
+
 </style>
