@@ -7,7 +7,7 @@ const memos = ref([]) // array untuk menyimpan memo
 function addMemo() { // function untuk menambah memo
   memos.value.push({ // tambah memo ke array memos
     id: Date.now(),  // membuat id unik untuk setiap memo dari tanggal sekarang
-    memo: newMemo.value, // isi memo dari inputan user
+    content: newMemo.value, // isi memo dari inputan user
     date: new Date().toLocaleDateString("id-ID"), // tanggal memo dibuat
     backgroundColor: getRandomColor(), // warna background memo acak
   })
@@ -31,23 +31,13 @@ function getRandomColor() { // function untuk membuat warna background acak
       </header>
       <!-- card memo -->
       <div class="card-container">
-        <div class="card">
-          <p class="card-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam totam eveniet harum
-            dolores, nihil maiores delectus earum quod non tempore dolor a rerum error rem animi? Aspernatur id ipsum
-            totam.</p>
-          <p class="card-date">2023-08-20</p>
-        </div>
-
-        <div class="card">
-          <p class="card-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam totam eveniet harum
-            dolores, nihil maiores delectus earum quod non tempore dolor a rerum error rem animi? Aspernatur id ipsum
-            totam.</p>
-          <p class="card-date">2023-08-20</p>
+        <div v-for="memo in memos" class="card" :style="{ backgroundColor: memo.backgroundColor }"> <!-- perulangan dari array memos dan memberikan style background color acak -->
+          <p class="card-content">{{ memo.content }}</p> <!-- isi memo dari array memos -->
+          <p class="card-date">{{ memo.date }}</p> <!-- tanggal memo dibuat -->
         </div>
       </div>
       <!--end card memo -->
     </div>
-    <!-- end memo -->
 
     <!-- form input memo / form modal -->
     <div v-show="showForm" class="form-overlay">
