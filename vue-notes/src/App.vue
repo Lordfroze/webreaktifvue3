@@ -1,15 +1,33 @@
 <script setup>
 import { ref } from "vue";
-const showForm = ref(true)
+const showForm = ref(false) // state untuk menampilkan form modal
+const newMemo = ref("") // state untuk menyimpan inputan memo
+const memos = ref([]) // array untuk menyimpan memo
+
+function addMemo() { // function untuk menambah memo
+  memos.value.push({ // tambah memo ke array memos
+    id: Date.now(),  // membuat id unik untuk setiap memo dari tanggal sekarang
+    memo: newMemo.value, // isi memo dari inputan user
+    date: new Date().toLocaleDateString("id-ID"), // tanggal memo dibuat
+    backgroundColor: getRandomColor(), // warna background memo acak
+  })
+  newMemo.value = "" // clear inputan memo setelah ditambahkan
+  showForm.value = false // hide form modal setelah ditambahkan
+}
+
+function getRandomColor() { // function untuk membuat warna background acak
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`
+}
 </script>
 
 <template>
   <main>
     <!-- memo -->
+     {{ memos }} <!-- menampilkan array memos -->
     <div class="container">
       <header>
         <h1 class="header-title">Memo</h1>
-        <button class="header-button">+</button>
+        <button @click="showForm = true" class="header-button">+</button>   <!-- tombol tambah memo -->
       </header>
       <!-- card memo -->
       <div class="card-container">
@@ -31,15 +49,15 @@ const showForm = ref(true)
     </div>
     <!-- end memo -->
 
-    <!-- form input memo -->
-    <div v-if="showForm" class="overlay">
+    <!-- form input memo / form modal -->
+    <div v-show="showForm" class="form-overlay">
       <div class="form-modal">
-        <button class="form-close-btn">&times;</button>
-        <textarea name="memo" id="memo" cols="30" rows="10"></textarea>
-        <button class="form-save-btn">Save</button>
+        <button @click="showForm = false" class="form-close-btn">&times;</button>  <!-- tombol close form -->
+        <textarea name="memo" id="memo" cols="30" rows="10" v-model="newMemo"></textarea>
+        <button @click="addMemo" class="form-save-btn">Save</button> <!-- tombol save memo untuk memanggil fungsi addMemo -->
       </div>
     </div>
-    <!-- end form input memo -->
+    <!-- end form input memo / end form modal -->
   </main>
 </template>
 
@@ -98,10 +116,10 @@ header {
   justify-content: space-between;
 }
 
-.overlay {
-  position : absolute;
-  top: 0;
-  left: 0;
+.form-overlay {
+  position : absolute; /** agar posisi diatas semua elemen */
+  top: 0; /** posisi dari atas */
+  left: 0; /** posisi dari kiri */
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.77);
@@ -109,6 +127,16 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.form-modal {
+  width: 420px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-save-btn {
@@ -122,6 +150,17 @@ header {
   margin-top: 15px;
   color: white;
 }
+
+.form-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 
 
 </style>
