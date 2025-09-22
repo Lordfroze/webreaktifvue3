@@ -3,8 +3,15 @@ import { ref } from "vue";
 const showForm = ref(false) // state untuk menampilkan form modal
 const newMemo = ref("") // state untuk menyimpan inputan memo
 const memos = ref([]) // array untuk menyimpan memo
+const errorMessage = ref("") // state untuk menyimpan pesan error
 
 function addMemo() { // function untuk menambah memo
+if(!newMemo.value) { // jika inputan memo kosong, maka tidak akan ditambahkan
+  errorMessage.value = "Memo tidak boleh kosong" // set pesan error
+  return; // hentikan eksekusi function
+}
+errorMessage.value = "" // clear pesan error setelah inputan valid
+
   memos.value.push({ // tambah memo ke array memos
     id: Date.now(),  // membuat id unik untuk setiap memo dari tanggal sekarang
     content: newMemo.value, // isi memo dari inputan user
@@ -31,7 +38,10 @@ function getRandomColor() { // function untuk membuat warna background acak
       </header>
       <!-- card memo -->
       <div class="card-container">
-        <div v-for="memo in memos" class="card" :style="{ backgroundColor: memo.backgroundColor }"> <!-- perulangan dari array memos dan memberikan style background color acak -->
+        <!-- perulangan dari array memos dan memberikan key unik untuk setiap memo -->
+        <div v-for="memo in memos" class="card"
+        :key="memo.id"
+        :style="{ backgroundColor: memo.backgroundColor }"> <!--memberikan style background color acak -->
           <p class="card-content">{{ memo.content }}</p> <!-- isi memo dari array memos -->
           <p class="card-date">{{ memo.date }}</p> <!-- tanggal memo dibuat -->
         </div>
@@ -43,6 +53,7 @@ function getRandomColor() { // function untuk membuat warna background acak
     <div v-show="showForm" class="form-overlay">
       <div class="form-modal">
         <button @click="showForm = false" class="form-close-btn">&times;</button>  <!-- tombol close form -->
+        <p v-if="errorMessage" class="form-error">{{ errorMessage }}</p> <!-- menampilkan pesan error -->
         <textarea name="memo" id="memo" cols="30" rows="10" v-model="newMemo"></textarea>
         <button @click="addMemo" class="form-save-btn">Save</button> <!-- tombol save memo untuk memanggil fungsi addMemo -->
       </div>
@@ -151,6 +162,9 @@ header {
   cursor: pointer;
 }
 
+.form-error {
+  color: red;
+}
 
 
 </style>
