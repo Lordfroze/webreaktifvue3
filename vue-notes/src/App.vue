@@ -25,6 +25,10 @@ errorMessage.value = "" // clear pesan error setelah inputan valid
 function getRandomColor() { // function untuk membuat warna background acak
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`
 }
+
+function deleteMemo(id) { // function untuk delete memo
+  memos.value = memos.value.filter((memo) =>  memo.id !== id); // memfilter id sesuai pada memo yang dipilih
+}
 </script>
 
 <template>
@@ -43,7 +47,10 @@ function getRandomColor() { // function untuk membuat warna background acak
         :key="memo.id"
         :style="{ backgroundColor: memo.backgroundColor }"> <!--memberikan style background color acak -->
           <p class="card-content">{{ memo.content }}</p> <!-- isi memo dari array memos -->
-          <p class="card-date">{{ memo.date }}</p> <!-- tanggal memo dibuat -->
+          <div class="card-footer">
+            <p class="card-date">{{ memo.date }}</p> <!-- tanggal memo dibuat -->
+            <button @click="deleteMemo(memo.id)" class="card-button">x</button> <!-- tombol hapus memo-->
+          </div>
         </div>
       </div>
       <!--end card memo -->
@@ -164,6 +171,13 @@ header {
 
 .form-error {
   color: red;
+}
+
+.card-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
 
