@@ -1,3 +1,11 @@
+<script setup>
+import { ref } from 'vue'; // mengimport ref dari vue
+import srcQuiz from './data/quizes.json' // mengimpor data quizes dari file json
+
+const quizes = ref(srcQuiz); // menginisialisasi data quizes dengan data dari file json
+// console.log(quizes);
+</script>
+
 <template>
   <main>
     <header>
@@ -6,24 +14,12 @@
     </header>
     <section id="quiz-container">
       <!-- card -->
-      <div class="card">
+      <div v-for="quiz in quizes" :key="quiz.id" class="card"> <!-- perulangan untuk menampilkan setiap quiz berdasarkan id-->
         <img
-          src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="programming">
+          :src="quiz.img" :alt="quiz.title"> <!-- menampilkan gambar quiz berdasarkan data img-->
         <div class="card-body">
-          <h2>Programming</h2>
-          <p>Questions</p>
-        </div>
-      </div>
-
-
-      <div class="card">
-        <img
-          src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="programming">
-        <div class="card-body">
-          <h2>Programming</h2>
-          <p>Questions</p>
+          <h2>{{ quiz.title }}</h2> <!-- menampilkan judul quiz berdasarkan data title-->
+          <p>{{ quiz.questions.length }}</p> <!-- menampilkan jumlah pertanyaan quiz berdasarkan data questions-->
         </div>
       </div>
 
