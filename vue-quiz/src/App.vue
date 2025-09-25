@@ -31,7 +31,7 @@ watch(search, () => { // memanggil watcher search
         </div>
       </div>
       <!-- end card -->
-      <Quizcard v-for="quiz in quizes" :key="quiz.id"/>
+      <Quizcard v-for="quiz in quizes" :key="quiz.id" :quiz="quiz"/> <!-- mengirim props quiz ke component Quizcard -->
     </section>
   </main>
 </template>
