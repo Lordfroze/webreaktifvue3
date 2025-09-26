@@ -9,9 +9,9 @@ const router = createRouter({ // membuat router
             component: () => import("../views/Home.vue"), // mengimport component Home.vue
         }, 
         {
-            path: "/product",
-            name: "product",
-            component: () => import("../views/Product.vue"),
+            path: "/products/:id", // path untuk halaman product dengan parameter id
+            name: "products", // name untuk halaman product dengan parameter id
+            component: () => import("../views/Product.vue"), // mengimport component Product.vue
         },
 
         {
