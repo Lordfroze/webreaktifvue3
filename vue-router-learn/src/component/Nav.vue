@@ -22,7 +22,7 @@ div {
     background-color: #f2f2f2;
 }
 
-.active {
+.active {  /** style untuk active link */
     font-weight: 900;
     color: white;
     background-color: red;

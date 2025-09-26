@@ -1,7 +1,26 @@
+<script setup>
+import products from "../data/product.json"; // mengimport data product.json
+import { RouterLink } from "vue-router"; // mengimport RouterLink dari vue-router
+</script>
+
 <template>
   <div>
-    <main>
     <h1>Home</h1>
-    </main>
+    <div class="product">
+      <!-- menampilkan product dengan v-for -->
+      <RouterLink
+      v-for="product in products"
+      :key="product.id"
+      :to ="`/product/${product.id}`"
+      >{{ product.name }}</RouterLink> 
+    </div>
   </div>
 </template>
+
+<style scoped>
+.product {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+</style>
