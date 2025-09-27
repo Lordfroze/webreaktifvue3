@@ -12,6 +12,13 @@ const router = createRouter({ // membuat router
             path: "/products/:id", // path untuk halaman product dengan parameter id
             name: "products", // name untuk halaman product dengan parameter id
             component: () => import("../views/Product.vue"), // mengimport component Product.vue
+            children: [
+                {
+                    path: "/products/:id/owner", // path untuk halaman owner dengan parameter id
+                    name: "owner", // name untuk halaman owner dengan parameter id
+                    component: () => import("../views/Owner.vue"), // mengimport component Owner.vue
+                }
+            ]
         },
 
         {
