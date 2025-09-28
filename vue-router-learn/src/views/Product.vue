@@ -21,7 +21,7 @@ function showOwner() {
 </script>
 
 <template>
-    <div>
+    <div v-if="product"> <!-- jika nilai const product bernilai true maka tampilkan-->
         <h1>Product</h1>
         <div>
         <h2>{{ product.name }} - {{ product.price }}</h2> <!-- menampilkan nama dan harga product -->
@@ -29,5 +29,9 @@ function showOwner() {
         </div>
         <button @click="showOwner">Show owner</button>
         <RouterView />
+    </div>
+    <div v-else> <!-- jika nilai const product bernilai false maka tampilkan product not found-->
+        <h1>Product not found</h1>
+        <p>Product dengan id {{ productId }} tidak ditemukan</p>
     </div>
 </template>
