@@ -24,10 +24,6 @@ watch(search, () => { // memanggil watcher search
 </template>
 
 <style scoped>
-main {
-  max-width: 900px;
-  margin: 0 auto;
-}
 
 header {
   margin-top: 30px;

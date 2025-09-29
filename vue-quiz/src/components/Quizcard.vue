@@ -1,12 +1,21 @@
 <script setup>
+import { defineProps } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 const {quiz} = defineProps(["quiz"])  // destructure props quiz yang didapat dari props quiz App.vue line34
-console.log(quiz)
+// console.log(quiz)
+
+// fungsi untuk menampilkan quiz berdasarkan id
+function goToQuiz() {
+    router.push({ name: 'quiz', params: { id: quiz.id } })
+}
 </script>
 
 
 <template>
      <!-- card -->
-      <div class="card"> <!-- perulangan untuk menampilkan setiap quiz berdasarkan id-->
+      <div class="card" @click="goToQuiz"> <!-- perulangan untuk menampilkan setiap quiz berdasarkan id-->
         <img
           :src="quiz.img" :alt="quiz.title"> <!-- menampilkan gambar quiz berdasarkan data img-->
         <div class="card-body">
