@@ -1,24 +1,20 @@
+<script setup>
+import { defineProps } from 'vue'; // mengimpor defineProps dari vue
+
+const {question} = defineProps(['question']); // mendefinisikan props question
+
+</script>
+
 <template>
     <section id="question-container">
-        <h1 class="question-title">What is 1+1</h1>
+        <h1 class="question-title">{{question.text}}</h1> <!-- menampilkan teks pertanyaan -->
     </section>
 
     <section id="options-container">
-        <div class="option">
-            <p class="option-label">A.</p>
-            <p class="option-value">1</p>
+        <div class="option" v-for = "option in question.answers" :key="option.id"> <!-- menampilkan opsi jawaban dengan label dan teks -->
+            <p class="option-label">{{option.label}}</p>
+            <p class="option-value">{{option.text}}</p>
         </div>
-
-        <div class="option">
-            <p class="option-label">B.</p>
-            <p class="option-value">2</p>
-        </div>
-
-        <div class="option">
-            <p class="option-label">C.</p>
-            <p class="option-value">tidak ada jawaban</p>
-        </div>
-
     </section>
 </template>
 
@@ -61,3 +57,5 @@
     align-items: center;
 }
 </style>
+
+// 04.32
