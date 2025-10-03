@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from 'vue'; // mengimpor defineProps dari vue
 
-const {question} = defineProps(['question']); // mendefinisikan props question
+const {question} = defineProps(['question']); // mendefinisikan props question yang diterima dari :question pada Quiz.vue baris 20
 
 </script>
 
@@ -11,9 +11,9 @@ const {question} = defineProps(['question']); // mendefinisikan props question
     </section>
 
     <section id="options-container">
-        <div class="option" v-for = "option in question.answers" :key="option.id"> <!-- menampilkan opsi jawaban dengan label dan teks -->
-            <p class="option-label">{{option.label}}</p>
-            <p class="option-value">{{option.text}}</p>
+        <div class="option" v-for = "option in question.answers" :key="option.id"> <!-- menampilkan opsi jawaban dengan perulangan dari question.answers -->
+            <p class="option-label">{{option.label}}</p> <!-- menampilkan label opsi jawaban -->
+            <p class="option-value">{{option.text}}</p> <!-- menampilkan teks opsi jawaban -->
         </div>
     </section>
 </template>

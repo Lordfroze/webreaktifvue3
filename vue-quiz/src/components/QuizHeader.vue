@@ -1,6 +1,11 @@
+<script setup>
+import { defineProps } from 'vue'; // mengimport defineProps dari vue
+const  {questionPage} = defineProps(['questionPage']); // mendefinisikan props questionPage dengan destructuring
+</script>
+
 <template>
     <header>
-        <h4>Qustion 1/2</h4>
+        <h4>Qustion {{questionPage}}</h4> <!-- menampilkan nomor halaman pertanyaan -->
         <div class="bar">
             <div class="bar-progress"></div>
         </div>
