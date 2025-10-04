@@ -1,19 +1,24 @@
 <script setup>
 import { defineProps } from 'vue'; // mengimpor defineProps dari vue
 
-const {question} = defineProps(['question']); // mendefinisikan props question yang diterima dari :question pada Quiz.vue baris 20
+const { question } = defineProps(['question']); // mendefinisikan props question yang diterima dari :question pada Quiz.vue baris 20
+const emit = defineEmits(['selectOption']); // mendefinisikan event selectOption yang akan diemit ke Quiz.vue
 
+function emitSelectedOption(option) {
+    emit('selectOption', option); // mengemit event selectOption dengan membawa nilai option
+}
 </script>
 
 <template>
     <section id="question-container">
-        <h1 class="question-title">{{question.text}}</h1> <!-- menampilkan teks pertanyaan -->
+        <h1 class="question-title">{{ question.text }}</h1> <!-- menampilkan teks pertanyaan -->
     </section>
 
     <section id="options-container">
-        <div class="option" v-for = "option in question.answers" :key="option.id"> <!-- menampilkan opsi jawaban dengan perulangan dari question.answers -->
-            <p class="option-label">{{option.label}}</p> <!-- menampilkan label opsi jawaban -->
-            <p class="option-value">{{option.text}}</p> <!-- menampilkan teks opsi jawaban -->
+        <div class="option" v-for="option in question.answers" :key="option.id" @click="emitSelectedOption(option)">
+            <!-- menampilkan opsi jawaban dengan perulangan dari question.answers dan mengirimkan nilai option ke emitSelectedOption -->
+            <p class="option-label">{{ option.label }}</p> <!-- menampilkan label opsi jawaban -->
+            <p class="option-value">{{ option.text }}</p> <!-- menampilkan teks opsi jawaban -->
         </div>
     </section>
 </template>
@@ -57,5 +62,3 @@ const {question} = defineProps(['question']); // mendefinisikan props question y
     align-items: center;
 }
 </style>
-
-// 04.32
